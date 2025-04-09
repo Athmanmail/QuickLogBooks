@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "406311730699",
+    "project_id": "q-logbook",
+    "storage_bucket": "q-logbook.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406311730699:android:8dc3e271b49b87991b510e",
+        "android_client_info": {
+          "package_name": "com.example.e_logbook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkgmdUIIlPxmEJhX48-GRJQamRwimeT_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
