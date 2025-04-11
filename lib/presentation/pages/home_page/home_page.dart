@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../core/configs/theme/appTheme.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -9,48 +12,42 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 1;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(widget.title),
-            const Spacer(),
-            const Icon(Icons.notification_add_outlined, color: Colors.black), // Added icon
-          ],
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'If you are a fan of my first app, give me a like',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: _notifier,
+      builder: (_, mode, __) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: mode,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          home: Scaffold(
+            appBar: AppBar(
+              title: Text(widget.title),
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    mode == ThemeMode.light
+                        ? CupertinoIcons.moon
+                        : CupertinoIcons.sun_max_fill,
+                  ),
+                  onPressed: () {
+                    _notifier.value = mode == ThemeMode.light
+                        ? ThemeMode.dark
+                        : ThemeMode.light;
+                  },
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            body: const Center(
+              child: Text("Hello, Flutter!"),
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.favorite_border_outlined),
-      ),
+          ),
+        );
+      },
     );
   }
 }
