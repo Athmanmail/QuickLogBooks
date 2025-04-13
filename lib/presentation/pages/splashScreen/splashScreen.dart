@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: AppColor.lightBackground, // ✅ Apply gradient here
+        color: AppColor.lightBackground, // ✅ Apply gradient here
       ),
       child: SafeArea(
         child: AnimatedSplashScreen(

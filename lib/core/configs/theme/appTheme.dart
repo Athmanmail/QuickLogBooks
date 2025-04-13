@@ -5,7 +5,7 @@ import 'appcolor.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
     primaryColor: AppColor.primary,
-    scaffoldBackgroundColor: AppColor.lightBackground.colors.first, // Fallback color
+    scaffoldBackgroundColor: AppColor.lightBackground, // Fallback color
     brightness: Brightness.light,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -15,7 +15,7 @@ class AppTheme {
           fontSize: 24,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
     ),
@@ -33,7 +33,7 @@ class AppTheme {
           fontSize: 24,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
     ),

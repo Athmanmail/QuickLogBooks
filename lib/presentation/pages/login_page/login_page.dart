@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: AppColor.lightBackground,
+        color: AppColor.lightBackground,
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,

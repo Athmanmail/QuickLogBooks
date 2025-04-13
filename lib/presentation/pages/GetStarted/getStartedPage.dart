@@ -10,7 +10,7 @@ class GetStartedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: AppColor.lightBackground, // ✅ Apply the gradient here
+        color: AppColor.lightBackground, // ✅ Apply the gradient here
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent, // ✅ Make Scaffold transparent
