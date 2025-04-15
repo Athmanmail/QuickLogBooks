@@ -36,9 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.8
   lottie: ^2.3.2
   animated_splash_screen:
-  firebase_core: ^3.12.1
-  firebase_auth: ^5.1.2
-  cloud_firestore: ^5.6.6
+  cloud_firestore: ^4.17.0
+  firebase_auth: ^4.19.5
+  firebase_core: ^2.31.0
+  smooth_page_indicator: ^1.1.0
+  shared_preferences: ^2.2.2
+  curved_navigation_bar: ^1.0.6
+  provider: ^6.0.5
+
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +81,26 @@ flutter:
          -  asset: assets/fonts/Satoshi-light.ttf
          -  asset: assets/fonts/Satoshi-Medium.ttf
          -  asset: assets/fonts/Satoshi-Regular.ttf
-
-
+     - family: HomemadeApple
+       fonts:
+         - asset: assets/fonts/HomemadeApple-Regular.ttf
+     - family: FacultyGlyphic
+       fonts:
+         - asset: assets/fonts/FacultyGlyphic-Regular.ttf
+     - family: OoohBaby
+       fonts:
+         - asset: assets/fonts/OoohBaby-Regular.ttf
+     - family: Frijole
+       fonts:
+         - asset: assets/fonts/Frijole-Regular.ttf
+     - family: Asul
+       fonts:
+         - asset: assets/fonts/Asul-Regular.ttf
+         - asset: assets/fonts/Asul-Bold.ttf
+     - family: Caveat
+       fonts:
+         - asset: assets/fonts/Caveat-Bold.ttf
+         - asset: assets/fonts/Caveat-Medium.ttf
+         - asset: assets/fonts/Caveat-Regular.ttf
+         - asset: assets/fonts/Caveat-SemiBold.ttf
 
