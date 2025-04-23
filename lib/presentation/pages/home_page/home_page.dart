@@ -64,12 +64,60 @@ class _MyHomePageState extends State<MyHomePage> {
       Icon(index == 3 ? Icons.person : Icons.person_outline_rounded, size: 30),
     ];
   }
+  Future<void> _showdialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('Confirm Logout'),
+          content: const Text("Are you sure you want to logout?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text("No"),
+            ),
+            TextButton(
+              onPressed: () async {
+                try {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('isLoggedIn', false); // End session
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                        (route) => false,
+                  );
+                } catch (e) {
+                  _showMessage("Logout failed: $e");
+                }
+              },
+              child: const Text("Yes"),
+            ),
+
+          ],
+        );
+      },
+    );
+  }
+
+// Example implementation of _showMessage
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
 
+
+
     return Scaffold(
+      extendBody: true,
       body: screens[index],
       appBar: AppBar(
         title: Text(
@@ -127,10 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 leading: const Icon(Icons.notifications),
                 title: const Text('Notifications', style: TextStyle(fontSize: 20)),
                 onTap: () {
-                  setState(() {
-                    index = 4;
-                  });
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NotificationsPage()),
+                  );
                 },
               ),
               ListTile(
@@ -166,15 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 leading: const Icon(Icons.logout),
                 title: const Text('Logout', style: TextStyle(fontSize: 20)),
-                onTap: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  await prefs.setBool('isLoggedIn', false); // End session
-
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                        (route) => false,
-                  );
-                },
+                onTap: _showdialog,
               ),
               const Divider(),
               ListTile(

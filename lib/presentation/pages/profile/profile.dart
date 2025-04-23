@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -103,7 +104,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColor.light),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -235,7 +236,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColor.light),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -445,7 +446,7 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColor.light),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -597,7 +598,7 @@ class _SettingsPageState extends State<SettingsPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColor.light),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -888,28 +889,73 @@ class _ProfilePageState extends State<ProfilePage> {
       _showMessage("Error fetching user data: $e");
     }
   }
+  Future<void> _showdialog() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('Confirm Logout'),
+          content: const Text("Are you sure you want to logout?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text("No"),
+            ),
+            TextButton(
+              onPressed: () async {
+                try {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('isLoggedIn', false); // End session
 
-  Future<void> _logout() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('isLoggedIn', false); // End session
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                        (route) => false,
+                  );
+                } catch (e) {
+                  _showMessage("Logout failed: $e");
+                }
+              },
+              child: const Text("Yes"),
+            ),
 
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-            builder: (context) => const LoginPage()),
-            (route) => false,
-      );
-    } catch (e) {
-      _showMessage("Logout failed: $e");
-    }
+          ],
+        );
+      },
+    );
   }
 
-  void _showMessage(String message, {bool success = false}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-      backgroundColor: success ? Colors.green : Colors.red,
-    ));
+// Example implementation of _showMessage
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
+
+  // Future<void> _logout() async {
+  //   try {
+  //     final prefs = await SharedPreferences.getInstance();
+  //     await prefs.setBool('isLoggedIn', false); // End session
+  //
+  //     Navigator.of(context).pushAndRemoveUntil(
+  //       MaterialPageRoute(
+  //           builder: (context) => const LoginPage()),
+  //           (route) => false,
+  //     );
+  //   } catch (e) {
+  //     _showMessage("Logout failed: $e");
+  //   }
+  // }
+  //
+  // void _showMessage(String message, {bool success = false}) {
+  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //     content: Text(message),
+  //     backgroundColor: success ? Colors.green : Colors.red,
+  //   ));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -1037,7 +1083,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   style: TextStyle(color: Colors.red),
                 ),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: _logout,
+                onTap: _showdialog,
               ),
             ],
           ),

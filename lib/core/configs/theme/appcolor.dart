@@ -8,7 +8,8 @@ class AppColor {
   static const textColor = Color(0xFF040417);
   static const objects = Color(0xFF000000);
   static const menu = Color(0xFF000000);
-  static const navbarLight = Color(0xC37AE5EA);
+  static const navbarLight = Color(0xFF2DAEAE);
   static const navbarDark = Color(0xFF2A2827);
   static const overlay = Color(0xFFC0F1F1);
+  static const container = Color(0xFFBD6A17);
 }
