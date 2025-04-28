@@ -2,7 +2,7 @@
     <application
         android:label="QuickLogBooks"
         android:name="${applicationName}"
-        android:icon="@mipmap/quickbookslogo">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
